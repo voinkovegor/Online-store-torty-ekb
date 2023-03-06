@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Торты{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+<div id="header">
+    <div>
+        <a href="/">
+        <img src="{% static "img/logo.jpg" %}" width="70" height="70" alt="Logo">Торты на заказ</a>
+    </div>
+</div>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+          {% if total_items > 0 %}
+            В корзине
+            <a href="{% url "cart:cart_detail" %}">
+              {{ total_items }} товар(-ов) на
+              {{ cart.get_total_price }} руб.
+            </a>
+          {% elif not order %}
+            Ваша корзина пуста
+          {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
