@@ -1,9 +1,36 @@
 @import url(//fonts.googleapis.com/css?family=Ubuntu);
 
+.card {
+  border-radius: 0.5em;
+  background: #ffe5d0;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  border-radius: 0.5em;
+}
+
+.col a {
+    outline: none;
+    text-decoration: none;
+}
+
+.link-dark:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#id_quantity {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
 body {
     margin:0;
     padding:0;
     font-family:helvetica, sans-serif;
+    background: #ffe5d0;
 }
 
 h1, h2, h3, h4, h5 , h6 {
@@ -12,16 +39,16 @@ h1, h2, h3, h4, h5 , h6 {
 
 a {
     text-decoration:none;
-    color:#5993bb;
+    color:#984c0c;
 }
 
 a:hover {
-    color:#77b6e2;
+    color:#ca6510;
 }
 
 a.button, input[type="submit"] {
     color:#fff;
-    background:#5993bb;
+    background:#984c0c;
     border-radius:4px;
     padding:10px 20px;
     font-size:14px;
@@ -29,8 +56,8 @@ a.button, input[type="submit"] {
 }
 
 a.button.light {
-    color:#666;
-    background:#ededed;
+    color:#000;
+    background:#f8d7da;
 }
 
 .text-left {
@@ -55,7 +82,7 @@ table th, table td {
 }
 
 tbody tr:nth-child(odd) {
-    background:#efefef;
+    background:#fff3cd;
 }
 
 tbody tr.subtotal {
@@ -63,8 +90,8 @@ tbody tr.subtotal {
 }
 
 thead th, tbody tr.total {
-    background:#5993bb;
-    color:#fff;
+    background:#f8d7da;
+    color:#000000;
     font-weight:bold;
 }
 
@@ -100,9 +127,9 @@ form p input {
     font-size:13px;
     margin-bottom:10px;
     padding:10px 12px;
-    border:0;
-    background:#efefef;
-    color:#666;
+    border:1;
+    background:#fff3cd;
+    color:#000;
     border-radius:4px;
 }
 
@@ -228,10 +255,9 @@ ul.errorlist {
 .order-info {
     float:right;
     width:300px;
-    background:#efefef;
+    background:#fff3cd;
     padding:10px 20px;
     color:#333;
-    border-bottom:4px solid #5993bb;
 }
 
 .order-info h3 {
@@ -328,3 +354,4 @@ form div.field {
     color:#666;
     border-radius:4px;
 }
+
