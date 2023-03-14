@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+
+  redis:
+      image: redis:7.0.5-alpine
+      hostname: redis
+
+  celery:
+    build: .
+    hostname: celery
+    entrypoint: celery
+    command: -A torty.celery.app worker -l info
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+    links:
+      - redis
+    depends_on:
+      - redis
+
+  flower:
+    build: .
+    hostname: flower
+    entrypoint: celery
+    command: -A torty.celery.app flower
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
