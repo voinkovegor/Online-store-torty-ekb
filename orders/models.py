@@ -18,7 +18,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return f'Order {self.id}'
+        return f'Заказ № {self.id}'
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
@@ -29,7 +29,8 @@ class OrderItem(models.Model):
                               on_delete=models.CASCADE)
     product = models.ForeignKey(Product,
                                 related_name='order_items',
-                                on_delete=models.CASCADE)
+                                on_delete=models.CASCADE,
+                                verbose_name='Товар')
     price = models.PositiveIntegerField(verbose_name='Цена')
     quantity = models.PositiveIntegerField(default=1,
                                            verbose_name='Количество')
