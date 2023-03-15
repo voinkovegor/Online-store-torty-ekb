@@ -6,6 +6,7 @@ class Order(models.Model):
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
     email = models.EmailField()
     phone = models.CharField(max_length=12, verbose_name='Телефон')
+    description = models.TextField(verbose_name='Пожелания', blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
