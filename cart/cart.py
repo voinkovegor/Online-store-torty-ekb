@@ -21,12 +21,12 @@ class Cart:
 
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0,
+            self.cart[product_id] = {'quantity': '0',
                                      'price': str(product.price)}
         if override_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[product_id]['quantity'] = str(Decimal(self.cart[product_id]['quantity']) + Decimal(quantity))
         self.save()
 
     def save(self):
@@ -55,16 +55,17 @@ class Cart:
             cart[str(product.id)]['product'] = product
         for item in cart.values():
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item['quantity'] = Decimal(item['quantity'])
+            item['total_price'] = item['price'] // 2 * item['quantity']
             yield item
 
     def __len__(self):
         """Подсчет всех товаров в корзине"""
-        return sum(item['quantity'] for item in self.cart.values())
+        return len([item['quantity'] for item in self.cart.values()])
 
     def get_total_price(self):
         """Подсчет стоимости товаров в корзине"""
-        return sum(Decimal(item['price']) * item['quantity'] for item in
+        return sum(Decimal(item['price']) // 2 * Decimal(item['quantity']) for item in
                    self.cart.values())
 
     def clear(self):
