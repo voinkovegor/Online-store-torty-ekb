@@ -5,7 +5,16 @@
   Ваша корзина
 {% endblock %}
 
+{% block nav %}
+<a class="nav-link active" href="{% url "shop:product_list" %}">Главная страница</a>
+<a class="nav-link" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
+<a class="nav-link" href="{% url "shop:tiered_cakes" %}">Ярусные торты</a>
+<a class="nav-link" href="{% url "shop:order_and_payment" %}">Заказ и оплата</a>
+<a class="nav-link" href="{% url "shop:contacts" %}">Контакты</a>
+{% endblock %}
+
 {% block content %}
+<div class="container">
   <h1>Ваша корзина</h1>
   <table class="cart">
     <thead>
@@ -60,4 +69,5 @@
     light">Продолжить покупки</a>
     <a href="{% url "orders:order_create" %}" class="button">Оформить заказ</a>
   </p>
+</div>
 {% endblock %}

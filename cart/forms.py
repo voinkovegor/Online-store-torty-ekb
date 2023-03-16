@@ -7,10 +7,8 @@ PRODUCT_QUANTITY_CHOICES = list(enumerate(map(str, l), start=1))
 class CartAddProductForm(forms.Form):
     quantity = forms.TypedChoiceField(
                                 choices=PRODUCT_QUANTITY_CHOICES,
-                                coerce=str)
+                                coerce=str,
+                                label='Вес, кг')
     override = forms.BooleanField(required=False,
                                   initial=False,
                                   widget=forms.HiddenInput)
-
-    class Meta:
-        verbose_name = 'Количество'

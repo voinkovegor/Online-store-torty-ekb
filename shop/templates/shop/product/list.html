@@ -1,32 +1,46 @@
 {% extends "shop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Товары{% endif %}
+    {% if category %}{{ category.name }}{% else %}Главная страница{% endif %}
 {% endblock %}
+
+{% block nav %}
+<a class="nav-link active" aria-current="page" href="{% url "shop:product_list" %}">Главная страница</a>
+<a class="nav-link" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
+<a class="nav-link" href="{% url "shop:tiered_cakes" %}">Ярусные торты</a>
+<a class="nav-link" href="{% url "shop:order_and_payment" %}">Заказ и оплата</a>
+<a class="nav-link" href="{% url "shop:contacts" %}">Контакты</a>
+{% endblock %}
+
 {% block content %}
-    <div id="sidebar">
-        <h3>Категории</h3>
-        <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url "shop:product_list" %}">Все категории</a>
-            </li>
-            {% for c in categories %}
-                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Продукты{% endif %}</h1>
+<div class="container">
+<main class="d-flex flex-nowrap">
+  <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+    <nav class="nav nav-pills flex-column mb-auto">
+      <a href="{% url "shop:product_list" %}" {% if not category %} class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %} class="nav-link link-dark" {% endif %}>Все категории</a>
+      {% for c in categories %}
+        <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %}class="nav-link link-dark" {% endif %}>{{ c.name }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+  <div class="container">
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                {{ product.price }} руб.
+        <div class="col">
+          <a href="{{ product.get_absolute_url }}">
+            <div class="card h-100">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100%" height="220">
+              <div class="card-body text-center text-dark">
+                <h5 class="card-title">{{ product.name }}</h5>
+                {{ product.price }} руб/кг
+              </div>
             </div>
+          </a>
+        </div>
         {% endfor %}
-    </div>
+      </div>
+  </div>
+</main>
+</div>
 {% endblock %}
+

@@ -137,10 +137,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CART_SESSION_ID = 'cart'
 
 # Email server configuration
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # Включение делает печать сообщений в консоль
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # Включение делает печать сообщений в консоль. Если выключено то идет отправка сообщений на почту
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')    # app-specific password https://myaccount.google.com/
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')    # пароли приложений https://myaccount.google.com/
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 

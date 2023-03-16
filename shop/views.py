@@ -29,3 +29,16 @@ def product_detail(request, id, slug):
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form})
+
+
+def contacts(request):
+    return render(request, 'shop/headers/contacts.html')
+
+def toppings_and_decoration(request):
+    return render(request, 'shop/headers/toppings_and_decoration.html')
+
+def tiered_cakes(request):
+    return render(request, 'shop/headers/tiered_cakes.html')
+
+def order_and_payment(request):
+    return render(request, 'shop/headers/order_and_payment.html')

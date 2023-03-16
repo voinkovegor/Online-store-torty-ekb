@@ -24,7 +24,7 @@ def order_created(order_id):
               f'torty-ekb.ru, +7(999)999-99-99'
     email_customer = EmailMessage(subject,
                           message,
-                          'admin@torty.ru',  # от кого письмо
+                          None,  # от кого письмо
                           [order.email])
     # generate PDF
     html = render_to_string('orders/order/pdf.html', {'order': order})
