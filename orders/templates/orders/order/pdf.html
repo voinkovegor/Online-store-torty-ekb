@@ -1,4 +1,12 @@
 <html>
+<head>
+  <style>
+    table th, table td {
+      text-align:center;
+      font-size:10px;
+    }
+  </style>
+</head>
 <body>
   <h1>Торты</h1>
   <p>
@@ -13,7 +21,6 @@
     {{ order.email }}<br>
     {{ order.phone }}
   </p>
-  <h3>Позиции</h3>
   <table>
     <thead>
       <tr>
@@ -35,7 +42,10 @@
         </tr>
       {% endfor %}
       <tr class="total">
-        <td colspan="4">Итого</td>
+        <td>Итого</td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td class="num">{{ order.get_total_cost }} руб.</td>
       </tr>
     </tbody>
