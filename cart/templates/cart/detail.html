@@ -21,9 +21,9 @@
       <tr>
         <th>Фото</th>
         <th>Продукт</th>
-        <th>Кол-во</th>
+        <th>Начинка и количество</th>
         <th>Удалить</th>
-        <th>Цена за ед.</th>
+        <th>Цена за кг.</th>
         <th>Стоимость</th>
       </tr>
     </thead>
@@ -37,11 +37,12 @@
                 {% else %}{% static "img/no_image.png" %}{% endif %}">
               </a>
             </td>
-            <td>{{ product.name }}</td>
-             <td>
+            <td><b>{{ product.name }}</b></td>
+            <td>
               <form action="{% url "cart:cart_add" product.id %}" method="post">
-                {{ item.update_quantity_form.quantity }}
-                {{ item.update_quantity_form.override }}
+                {{ item.update_fields_form.topping }}
+                {{ item.update_fields_form.quantity }}
+                {{ item.update_fields_form.override }}
                 <input type="submit" value="Изменить">
                 {% csrf_token %}
               </form>

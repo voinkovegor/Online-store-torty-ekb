@@ -1,5 +1,6 @@
 from django.db import models
-from shop.models import Product
+from shop.models import Product, Topping
+
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50, verbose_name='Имя')
@@ -33,11 +34,15 @@ class OrderItem(models.Model):
                                 on_delete=models.CASCADE,
                                 verbose_name='Товар')
     price = models.PositiveIntegerField(verbose_name='Цена')
-    quantity = models.PositiveIntegerField(default=1,
-                                           verbose_name='Количество')
+    quantity = models.CharField(max_length=10, verbose_name='Количество')
+    topping = models.ForeignKey(Topping,
+                                related_name='topping',
+                                on_delete=models.DO_NOTHING,
+                                null=True, blank=True,
+                                verbose_name='Начинка')
 
     def __str__(self):
         return str(self.id)
 
     def get_cost(self):
-        return self.price * self.quantity
+        return int(self.price * self.quantity)

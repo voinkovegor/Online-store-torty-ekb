@@ -29,9 +29,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/%Y/%m/%d',
                               blank=True)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10,
-                                decimal_places=2,
-                                default=1500)
+    price = models.IntegerField(default=1500)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -47,3 +45,24 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product_detail',
                        args=[self.id, self.slug])
+
+
+class Topping(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    image = models.ImageField(upload_to='topping/%Y/%m/%d',
+                              blank=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Начинка'
+        verbose_name_plural = 'Начинки'
+
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse_lazy('shop:toppings_and_decoration',
+                        args=[self.slug])

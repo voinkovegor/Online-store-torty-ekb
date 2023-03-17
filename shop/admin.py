@@ -14,3 +14,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'available']
     prepopulated_fields = {'slug': ['name']}
 admin.site.register(Product, ProductAdmin)
+
+
+class ToppingAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ['name']}
+admin.site.register(Topping, ToppingAdmin)

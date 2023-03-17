@@ -1,3 +1,5 @@
+from _pydecimal import Decimal
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404
 from .models import OrderItem, Order
@@ -21,7 +23,8 @@ def order_create(request):
                 OrderItem.objects.create(order=order,
                                         product=item['product'],
                                         price=item['price'],
-                                        quantity=item['quantity'])
+                                        quantity=item['quantity'],
+                                        topping=item['get_topping'])
             # clear the cart
             cart.clear()
             # launch asynchronous task

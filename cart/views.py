@@ -14,8 +14,9 @@ def cart_add(request, product_id):
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,
+                 topping=cd['topping'],
                  quantity=cd['quantity'],
-                 override_quantity=cd['override'])
+                 override_fields=cd['override'])
     return redirect('cart:cart_detail')
 
 @require_POST
@@ -28,7 +29,8 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     cart = Cart(request)
     for item in cart:
-        item['update_quantity_form'] = CartAddProductForm(initial={
+        item['update_fields_form'] = CartAddProductForm(initial={
+            'topping': item['topping'],
             'quantity': item['quantity'],
             'override': True
         })
