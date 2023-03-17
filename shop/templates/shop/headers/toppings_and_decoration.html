@@ -4,10 +4,91 @@
     Начинки и оформление
 {% endblock %}
 
+{% block styles %}
+<style xmlns:shop="http://www.w3.org/1999/xhtml">
+  .card {
+  border-radius: 0.5em;
+  background: rgb(253, 248, 240);
+  }
+
+  .card:hover {
+  background-color: rgb(253, 248, 240);
+  }
+
+  .row .col {
+    marging-top: 20px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+</style>
+{% endblock %}
+
 {% block nav %}
 <a class="nav-link" href="{% url "shop:product_list" %}">Главная страница</a>
 <a class="nav-link active" aria-current="page" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
 <a class="nav-link" href="{% url "shop:tiered_cakes" %}">Ярусные торты</a>
 <a class="nav-link" href="{% url "shop:order_and_payment" %}">Заказ и оплата</a>
 <a class="nav-link" href="{% url "shop:contacts" %}">Контакты</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="container w-75">
+  <div class="container w-60 text-center lh-lg">
+    <h1>НАЧИНКИ И ОФОРМЛЕНИЕ ТОРТОВ</h1>
+    <h4>Для тортов с бисквитными коржами
+        можно выбрать <b>ЛЮБУЮ</b> начинку
+    из представленных ниже</h4>
+    <br>
+    <h4>Бисквитные торты покрыты <u><b>крем-чизом</b></u>,
+        при желании можно выбрать ДЕКОР торта или
+        прислать пример фотографии
+        (стоимость рассчитывается индивидуально
+        по согласованию с менеджером).
+    </h4>
+      <i>(Вставить фотки сделанного декора внизу)</i>
+      <br><br>
+      <h2>Начинки бисквитных тортов</h2>
+  </div>
+
+  <div class="row row-cols-2">
+    {% for topping in toppings %}
+      {% if topping.image and topping.available %}
+        <div class="col">
+            <div class="card h-100">
+              <img src="{% if topping.image %}{{ topping.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100%" height="400">
+              <div class="card-body text-center text-dark">
+                <h5 class="card-title"><b>{{ topping.name.upper }}</b></h5>
+                {{ topping.description }}
+              </div>
+            </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+<br><br>
+<div class="container w-60 text-center lh-lg">
+<h2>Оформление бисквитных тортов</h2>
+<h4>Вы можете выбрать один из вариантов декора торта
+    или прикрепить к заказу ссылку на понравившееся
+    оформление торта в качестве образца</h4>
+<br>
+</div>
+  <div class="row row-cols-2">
+    {% for dekor in dekors %}
+        <div class="col">
+            <div class="card h-100">
+              <img src="{% if dekor.image %}{{ dekor.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100%" height="400">
+              <div class="card-body text-center text-dark">
+                <h5 class="card-title"><b>{{ dekor.name.upper }}</b></h5>
+                {{ dekor.description }}
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+<br>
 {% endblock %}

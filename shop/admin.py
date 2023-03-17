@@ -17,6 +17,13 @@ admin.site.register(Product, ProductAdmin)
 
 
 class ToppingAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ['name']}
+    list_display = ['name', 'available']
+    list_filter = ['available']
+    list_editable = ['available']
 admin.site.register(Topping, ToppingAdmin)
+
+class DekorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'available']
+    list_filter = ['available']
+    list_editable = ['available']
+admin.site.register(Dekor, DekorAdmin)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Product
+from .models import Category, Product, Topping, Dekor
 from cart.forms import CartAddProductForm
 
 
@@ -35,7 +35,12 @@ def contacts(request):
     return render(request, 'shop/headers/contacts.html')
 
 def toppings_and_decoration(request):
-    return render(request, 'shop/headers/toppings_and_decoration.html')
+    toppings = Topping.objects.all()
+    dekors = Dekor.objects.filter(available=True)
+    return render(request,
+                  'shop/headers/toppings_and_decoration.html',
+                  {'toppings': toppings,
+                   'dekors': dekors})
 
 def tiered_cakes(request):
     return render(request, 'shop/headers/tiered_cakes.html')

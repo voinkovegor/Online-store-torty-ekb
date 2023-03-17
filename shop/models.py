@@ -17,7 +17,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('shop:product_list_by_category',
-                        args=[self.slug])
+                            args=[self.slug])
 
 
 class Product(models.Model):
@@ -49,20 +49,31 @@ class Product(models.Model):
 
 class Topping(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
     image = models.ImageField(upload_to='topping/%Y/%m/%d',
                               blank=True)
     description = models.TextField(blank=True)
+    available = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['name']
         verbose_name = 'Начинка'
         verbose_name_plural = 'Начинки'
 
-
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse_lazy('shop:toppings_and_decoration',
-                        args=[self.slug])
+
+class Dekor(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='topping/%Y/%m/%d',
+                              blank=True)
+    description = models.TextField(blank=True)
+    available = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Декор'
+        verbose_name_plural = 'Декоры'
+
+    def __str__(self):
+        return self.name
