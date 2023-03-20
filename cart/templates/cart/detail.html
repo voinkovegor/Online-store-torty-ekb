@@ -33,17 +33,15 @@
           <tr>
             <td>
               <a href="{{ product.get_absolute_url }}">
-                <img src="{% if product.image %}{{ product.image.url }}
-                {% else %}{% static "img/no_image.png" %}{% endif %}">
+                <img src="{{ product.image.url }}">
               </a>
             </td>
             <td><b>{{ product.name }}</b></td>
             <td>
-              <form action="{% url "cart:cart_add" product.id %}" method="post">
+              <form id="change_fields" action="{% url "cart:cart_add" product.id %}" method="post">
                 {{ item.update_fields_form.topping }}
                 {{ item.update_fields_form.quantity }}
                 {{ item.update_fields_form.override }}
-                <input type="submit" value="Изменить">
                 {% csrf_token %}
               </form>
             </td>
@@ -71,4 +69,20 @@
     <a href="{% url "orders:order_create" %}" class="button">Оформить заказ</a>
   </p>
 </div>
+<script>
+<!--  // Получаем форму и поле ChoiceField по их id-->
+  var cartForm = document.querySelector('#change_fields');
+  var choiceQuantity = document.querySelector('#id_quantity');
+  var choiceTopping = document.querySelector('#id_topping');
+
+<!--  // Добавляем обработчик события "change" на поле ChoiceField-->
+  choiceQuantity.addEventListener('change', () => {
+<!--    // Отправляем данные формы на сервер-->
+    cartForm.submit();
+  });
+    choiceTopping.addEventListener('change', () => {
+<!--    // Отправляем данные формы на сервер-->
+    cartForm.submit();
+  });
+</script>
 {% endblock %}
