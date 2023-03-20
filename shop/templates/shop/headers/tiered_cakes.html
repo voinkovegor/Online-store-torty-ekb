@@ -8,7 +8,19 @@
 <a class="nav-link" href="{% url "shop:product_list" %}">Главная страница</a>
 <a class="nav-link" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
 <a class="nav-link active" aria-current="page" href="{% url "shop:tiered_cakes" %}">Ярусные торты</a>
-<a class="nav-link" href="{% url "shop:order_and_payment" %}">Заказ и оплата</a>
+<a class="nav-link" href="{% url "shop:order_and_payment" %}">Как заказать</a>
 <a class="nav-link" href="{% url "shop:contacts" %}">Контакты</a>
 {% endblock %}
 
+
+{% block content %}
+<div class="container text-center">
+<h1>Как выбрать многоярусный торт</h1>
+<p class="fs-5">Если необходимый вес торта превышает 3 кг,
+    можно сделать торт из нескольких ярусов.</p>
+    <p class="fs-5">В разных ярусах могут быть разные начинки.</p><br>
+<h3>Примерный вес ярусов в многоярусных тортах</h3>
+<img src="{% static  "img/Yarusy.png" %}">
+<br><br><br>
+</div>
+{% endblock %}
