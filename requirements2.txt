@@ -1,0 +1,8 @@
+brotli==1.0.9
+django==4.1.7
+django-environ==0.10.0
+flower==1.2.0
+pip-chill==1.0.1
+redis==4.5.1
+weasyprint==58.1
+zopfli==0.2.2

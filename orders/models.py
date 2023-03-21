@@ -1,3 +1,5 @@
+from _pydecimal import Decimal
+
 from django.db import models
 from shop.models import Product, Topping
 
@@ -34,7 +36,8 @@ class OrderItem(models.Model):
                                 on_delete=models.CASCADE,
                                 verbose_name='Товар')
     price = models.PositiveIntegerField(verbose_name='Цена')
-    quantity = models.CharField(max_length=10, verbose_name='Количество')
+    quantity = models.CharField(max_length=10,
+                                verbose_name='Количество')
     topping = models.ForeignKey(Topping,
                                 related_name='topping',
                                 on_delete=models.DO_NOTHING,
@@ -45,4 +48,4 @@ class OrderItem(models.Model):
         return str(self.id)
 
     def get_cost(self):
-        return int(self.price * self.quantity)
+        return int(self.price * Decimal(self.quantity))

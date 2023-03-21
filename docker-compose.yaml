@@ -20,7 +20,7 @@ services:
     build: .
     hostname: celery
     entrypoint: celery
-    command: -A torty.celery.app worker -l info
+    command: -A torty.celery.app worker
     volumes:
       - ./:/app
     env_file:

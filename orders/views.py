@@ -23,7 +23,7 @@ def order_create(request):
                 OrderItem.objects.create(order=order,
                                         product=item['product'],
                                         price=item['price'],
-                                        quantity=item['quantity'],
+                                        quantity=Decimal(item['quantity']),
                                         topping=item['get_topping'])
             # clear the cart
             cart.clear()
