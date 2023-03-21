@@ -23,12 +23,11 @@
 }
 
 textarea {
-  background: #fff3cd;
+  background: #e9ecef;
+  border-radius: 5px;
+  border-width: 2px;
 }
 
-#id_quantity {
-  background-color: #fff;
-}
 
 body {
     margin:0;
@@ -79,7 +78,7 @@ table {
 }
 
 table th, table td {
-    text-align:left;
+    text-align:center;
     font-size:14px;
     padding:10px;
     margin:0;
@@ -132,7 +131,7 @@ form p input {
     margin-bottom:10px;
     padding:10px 12px;
     border:1;
-    background:#fff3cd;
+    background: #e9ecef;
     color:#000;
     border-radius:4px;
 }
@@ -265,14 +264,11 @@ ul.errorlist {
 .order-info {
     float:right;
     width:300px;
-    background:#fff3cd;
+    background: #e9ecef;
     padding:10px 20px;
     color:#333;
 }
 
-.order-info h3 {
-    color:#5993bb;
-}
 
 .order-info ul li {
     margin:0;

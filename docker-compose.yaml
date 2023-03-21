@@ -15,12 +15,14 @@ services:
   redis:
       image: redis:7.0.5-alpine
       hostname: redis
+      restart: always
 
   celery:
     build: .
     hostname: celery
     entrypoint: celery
     command: -A torty.celery.app worker
+    restart: always
     volumes:
       - ./:/app
     env_file:
@@ -35,6 +37,7 @@ services:
     hostname: flower
     entrypoint: celery
     command: -A torty.celery.app flower
+    restart: always
     volumes:
       - ./:/app
     env_file:
