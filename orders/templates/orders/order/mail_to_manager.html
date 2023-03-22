@@ -1,0 +1,9 @@
+{% extends "orders/order/mail_base.html" %}
+
+  {% block message %}
+  <p>{{ order.first_name }} {{ order.first_name }} разместил(-а) заказ № {{ order.id }}</p>
+  <p>Необходимо согласовать заказ по телефону:</p>
+  <p>{{ order.phone }}</p>
+  <p>E-mail заказчика: {{ order.email }}</p>
+  <p>Детали заказа:</p>
+  {% endblock %}

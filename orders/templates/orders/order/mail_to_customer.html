@@ -1,0 +1,9 @@
+{% extends "orders/order/mail_base.html" %}
+
+  {% block message %}
+  <p>Уважаемый(-ая) {{ order.first_name }}</p>
+  <p>Вы успешно оформили заказ № {{ order.id }} на сумму {{ order.get_total_cost }} руб.</p>
+  <p>В ближайшее время с вами свяжется менеджер.</p>
+  <p>torty-ekb.ru, +7(999)999-99-99</p>
+  <p>Детали заказа:</p>
+  {% endblock %}
