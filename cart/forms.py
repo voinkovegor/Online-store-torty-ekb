@@ -12,7 +12,8 @@ class CartAddProductForm(forms.Form):
                                 label='Вес, кг')
     topping = forms.ModelChoiceField(queryset=Topping.objects.filter(available=True),
                                      empty_label='Уточнить начинку по телефону',
-                                     initial=Topping.objects.get(pk=1), label="Начинка")
+                                     required=False,
+                                     label="Начинка")
     override = forms.BooleanField(required=False,
                                   initial=False,
                                   widget=forms.HiddenInput)

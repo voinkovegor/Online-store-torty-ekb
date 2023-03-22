@@ -35,7 +35,7 @@
       {% for item in order.items.all %}
         <tr class="row{% cycle "1" "2" %}">
           <td>{{ item.product.name }}</td>
-          <td>{{ item.topping.name }}</td>
+          <td>{{ item.topping }}</td>
           <td>{{ item.price }} руб.</td>
           <td>{{ item.quantity }} кг</td>
           <td>{{ item.get_cost }} руб.</td>

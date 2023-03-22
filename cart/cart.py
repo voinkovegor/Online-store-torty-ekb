@@ -5,6 +5,14 @@ from django.conf import settings
 from shop.models import Product, Topping
 
 
+class EmptyTopping:
+    id = 123
+    name = 'Уточнить начинку по телефону'
+
+    def __str__(self):
+        return self.name
+
+
 class Cart:
     def __init__(self, request):
         """Initalize the cart"""
@@ -20,18 +28,22 @@ class Cart:
         """Добавить продукт в корзину или обновить его количество"""
 
         product_id = str(product.id)
-        topping = topping.id
+        if not topping:
+            topping = EmptyTopping
 
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': '0',
                                      'price': str(product.price),
-                                     'topping': topping}
+                                     'topping': topping.id,
+                                     'topping_name': topping.name}
         if override_fields:
             self.cart[product_id]['quantity'] = quantity
-            self.cart[product_id]['topping'] = topping
+            self.cart[product_id]['topping_name'] = topping.name
+            self.cart[product_id]['topping'] = topping.id
         else:
             self.cart[product_id]['quantity'] = str(Decimal(self.cart[product_id]['quantity']) + Decimal(quantity))
-            self.cart[product_id]['topping'] = topping
+            self.cart[product_id]['topping_name'] = topping.name
+            self.cart[product_id]['topping'] = topping.id
 
         self.save()
 
@@ -60,7 +72,7 @@ class Cart:
         for product in products:
             cart[str(product.id)]['product'] = product
         for item in cart.values():
-            item['get_topping'] = Topping.objects.get(pk=item['topping'])
+            item['topping_name'] = item['topping_name']
             item['price'] = Decimal(item['price'])
             item['quantity'] = Decimal(item['quantity'])
             item['total_price'] = int(item['price'] * item['quantity'])

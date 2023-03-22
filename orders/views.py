@@ -24,7 +24,7 @@ def order_create(request):
                                         product=item['product'],
                                         price=item['price'],
                                         quantity=Decimal(item['quantity']),
-                                        topping=item['get_topping'])
+                                        topping=item['topping_name'])
             # clear the cart
             cart.clear()
             # launch asynchronous task

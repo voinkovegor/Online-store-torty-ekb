@@ -21,7 +21,7 @@
       {% for item in cart %}
         <li>
           {{ item.quantity }} кг. {{ item.product.name }}<br>
-          Начинка: {{ item.get_topping }}
+          Начинка: {{ item.topping_name }}
           <span>{{ item.total_price }} руб.</span>
         </li>
       {% endfor %}

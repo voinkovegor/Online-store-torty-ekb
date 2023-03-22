@@ -38,11 +38,9 @@ class OrderItem(models.Model):
     price = models.PositiveIntegerField(verbose_name='Цена')
     quantity = models.CharField(max_length=10,
                                 verbose_name='Количество')
-    topping = models.ForeignKey(Topping,
-                                related_name='topping',
-                                on_delete=models.DO_NOTHING,
-                                null=True, blank=True,
-                                verbose_name='Начинка')
+    topping = models.CharField(max_length=255,
+                               verbose_name='Начинка',
+                               default='Уточнить начинку по телефону')
 
     def __str__(self):
         return str(self.id)
