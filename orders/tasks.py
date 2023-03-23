@@ -1,13 +1,10 @@
 from celery import shared_task
 
-from torty.settings import EMAIL_MAKER
 from .models import Order
 
-from io import BytesIO
-import weasyprint
-from django.template.loader import render_to_string, get_template
-from django.core.mail import EmailMessage, send_mail
-from django.conf import settings
+from django.template.loader import get_template
+from django.core.mail import send_mail
+
 
 
 @shared_task
