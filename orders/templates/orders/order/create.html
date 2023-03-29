@@ -19,11 +19,18 @@
     <h3>Ваш заказ</h3>
     <ul>
       {% for item in cart %}
-        <li>
-          {{ item.quantity }} кг. {{ item.product.name }}<br>
-          Начинка: {{ item.topping_name }}
-          <span>{{ item.total_price }} руб.</span>
-        </li>
+        {% if item.product.choice %}
+          <li>
+            {{ item.quantity }} кг. {{ item.product.name }}<br>
+            Начинка: {{ item.topping_name }}
+            <span>{{ item.total_price }} руб.</span>
+          </li>
+        {% else %}
+          <li>
+            {{ item.quantity }} шт. {{ item.product.name }}<br>
+            <span>{{ item.total_price }} руб.</span>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
     <p>Сумма: {{ cart.get_total_price }} руб.</p>

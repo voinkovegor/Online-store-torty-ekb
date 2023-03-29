@@ -12,12 +12,19 @@
     <img src="{% if product.image %}{{ product.image.url }}{% else %}
     {% static "img/no_image.png" %}{% endif %}">
     <h1>{{ product.name }}</h1>
-    <p class="price">{{ product.price }} руб/кг </p>
-    <form action="{% url "cart:cart_add" product.id %}" method="post">
-      {{ cart_product_form }}
-      {% csrf_token %}
-      <input type="submit" value="Добавить в корзину">
-    </form>
+    <p class="price">{{ product.price }} {% if product.choice %} руб/кг {% else %} руб {% endif %}</p>
+    {% if product.choice %}
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="Добавить в корзину">
+      </form>
+    {% else %}
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Добавить в корзину">
+      </form>
+    {% endif %}
     <br>
     {{ product.description|linebreaks }}
   </div>
