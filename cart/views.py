@@ -10,13 +10,19 @@ from shop.models import Product
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
-    form = CartAddProductForm(request.POST)
-    if form.is_valid():
-        cd = form.cleaned_data
+    if product.choice:
+        form = CartAddProductForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            cart.add(product=product,
+                     topping=cd['topping'],
+                     quantity=cd['quantity'],
+                     override_fields=cd['override'])
+    else:
         cart.add(product=product,
-                 topping=cd['topping'],
-                 quantity=cd['quantity'],
-                 override_fields=cd['override'])
+                 topping=None,
+                 quantity='1',
+                 override_fields=False)
     return redirect('cart:cart_detail')
 
 @require_POST

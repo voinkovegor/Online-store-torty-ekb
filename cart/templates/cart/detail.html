@@ -23,7 +23,7 @@
         <th>Продукт</th>
         <th>Начинка и количество</th>
         <th>Удалить</th>
-        <th>Цена за кг.</th>
+        <th>Цена за кг. или шт.</th>
         <th>Стоимость</th>
       </tr>
     </thead>
@@ -38,12 +38,16 @@
             </td>
             <td><b>{{ product.name }}</b></td>
             <td>
-              <form id="change_fields" action="{% url "cart:cart_add" product.id %}" method="post">
-                {{ item.update_fields_form.topping }}
-                {{ item.update_fields_form.quantity }}
-                {{ item.update_fields_form.override }}
-                {% csrf_token %}
-              </form>
+              {% if product.choice %}
+                <form id="change_fields" action="{% url "cart:cart_add" product.id %}" method="post">
+                  {{ item.update_fields_form.topping }}
+                  {{ item.update_fields_form.quantity }}
+                  {{ item.update_fields_form.override }}
+                  {% csrf_token %}
+                </form>
+              {% else %}
+                Стандартная
+              {% endif %}
             </td>
             <td>
               <form action="{% url "cart:cart_remove" product.id %}" method="post">
@@ -51,8 +55,8 @@
                 {% csrf_token %}
               </form>
             </td>
-            <td class="num">{{ item.price }} руб.</td>
-            <td class="num">{{ item.total_price }} руб.</td>
+            <td>{{ item.price }} руб.</td>
+            <td>{{ item.total_price }} руб.</td>
           </tr>
         {% endwith %}
       {% endfor %}
