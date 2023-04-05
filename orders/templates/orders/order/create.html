@@ -13,36 +13,48 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1>Оформление заказа</h1>
-  <div class="order-info">
-    <h3>Ваш заказ</h3>
-    <ul>
-      {% for item in cart %}
-        {% if item.product.choice %}
-          <li>
-            {{ item.quantity }} кг. {{ item.product.name }}<br>
-            Начинка: {{ item.topping_name }}
-            <span>{{ item.total_price }} руб.</span>
-          </li>
-        {% else %}
-          <li>
-            {{ item.quantity }} шт. {{ item.product.name }}<br>
-            <span>{{ item.total_price }} руб.</span>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-    <p>Сумма: {{ cart.get_total_price }} руб.</p>
+
+<div class="container" style="padding-top: 20px">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="order-info">
+        <h3>Ваш заказ</h3>
+        <ul>
+          {% for item in cart %}
+            {% if item.product.choice %}
+              <li>
+                {{ item.quantity }} кг. {{ item.product.name }}<br>
+                Начинка: {{ item.topping_name }}
+                <span>{{ item.total_price }} руб.</span>
+              </li>
+            {% else %}
+              <li>
+                {{ item.quantity }} шт. {{ item.product.name }}<br>
+                <span>{{ item.total_price }} руб.</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        <p>Сумма: {{ cart.get_total_price }} руб.</p>
+      </div>
+    </div>
+    <div class="col-md-5 d-flex flex-column text-center" style="margin-top: 20px">
+      <p class="fs-5">Пожалуйста, внимательно проверьте ваш заказ!</p>
+      <p class="fs-5">В форме укажите ваши контактные данные для связи</p>
+    </div>
+      <div class="col-md-4">
+        <form method="post" class="order-form">
+          {% for f in form %}
+          <p><label class="form-label" style="width: 100%" for="{{ f.id_for_label }}">{{ f.label }}: </label></p>
+          <p>{{ f }}</p>
+          <div class="form-error">{{ f.errors }}</div>
+          {% endfor %}
+          <p><input type="submit" value="Оформить заказ"></p>
+          {% csrf_token %}
+        </form>
+      </div>
   </div>
-  <form method="post" class="order-form">
-    {% for f in form %}
-    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label></p>
-    <p>{{ f }}</p>
-    <div class="form-error">{{ f.errors }}</div>
-    {% endfor %}
-    <p><input type="submit" value="Оформить заказ"></p>
-    {% csrf_token %}
-  </form>
 </div>
+
+
 {% endblock %}

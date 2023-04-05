@@ -4,36 +4,81 @@
     {% if category %}{{ category.name }}{% else %}Главная страница{% endif %}
 {% endblock %}
 
+{% block styles %}
+<style>
+@media (max-width: 768px) {
+.main-container {
+flex-wrap: wrap;
+}
+.collapse-btn {
+display: block;
+}
+.main-container.collapse .side-nav {
+display: none;
+}
+.external-content {
+display: none;
+}
+.main-container.collapse .external-content {
+display: block;
+}
+}
+
+.main-container {
+display: flex;
+flex-wrap: nowrap;
+}
+
+.side-nav {
+width: 280px;
+}
+
+.main {
+flex: 1;
+}
+
+.main-container.collapse .side-nav {
+display: none;
+}
+
+.collapse-btn {
+display: none;
+}
+</style>
+{% endblock %}
+
 
 {% block content %}
 <div class="container">
-<main class="d-flex flex-nowrap">
-  <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-    <nav class="nav nav-pills flex-column mb-auto">
-      <a href="{% url "shop:product_list" %}" {% if not category %} class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %} class="nav-link link-dark" {% endif %}>Все категории</a>
-      {% for c in categories %}
-        <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %}class="nav-link link-dark" {% endif %}>{{ c.name }}</a>
-      {% endfor %}
-    </nav>
-  </div>
-  <div class="container">
-      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for product in products %}
-        <div class="col">
-          <a href="{{ product.get_absolute_url }}">
-            <div class="card h-100">
-              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100%" height="220">
-              <div class="card-body text-center text-dark">
-                <h5 class="card-title">{{ product.name }}</h5>
-                {{ product.price }} {% if product.choice %} руб/кг {% else %} руб {% endif %}
-              </div>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
+    <main class="d-flex flex-wrap flex-md-nowrap main">
+      <div class="d-flex flex-column flex-shrink-0 p-3 external-content" style="width: 280px;">
+        <nav class="nav nav-pills flex-column mb-auto">
+          <a href="{% url "shop:product_list" %}" {% if not category %} class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %} class="nav-link link-dark" {% endif %}>Все категории</a>
+          {% for c in categories %}
+          <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}class="nav-link active" style="background-color: #984c0c" aria-current="page" {% else %}class="nav-link link-dark" {% endif %}>{{ c.name }}</a>
+          {% endfor %}
+        </nav>
       </div>
-  </div>
-</main>
+      <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {% for product in products %}
+          <div class="col-12 col-md-6 col-lg-4">
+            <a href="{{ product.get_absolute_url }}">
+              <div class="card h-100">
+                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="h-100 card-img-top img-fluid"">
+                <div class="card-body text-center text-dark">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  {{ product.price }} {% if product.choice %} руб/кг {% else %} руб {% endif %}
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </main>
 </div>
+
+
 {% endblock %}
 
