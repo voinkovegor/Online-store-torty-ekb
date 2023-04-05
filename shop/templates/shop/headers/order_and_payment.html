@@ -4,6 +4,27 @@
     Как заказать
 {% endblock %}
 
+{% block styles %}
+  <style>
+  /* настройки для больших экранов */
+    .container.screen {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 75%; /* 75% от ширины экрана */
+    }
+
+    /* настройки для маленьких экранов */
+    @media (max-width: 768px) {
+      .container.screen {
+        width: 100%; /* контейнер занимает всю ширину экрана */
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  </style>
+{% endblock %}
+
 {% block nav %}
 <a class="nav-link" aria-current="page" href="{% url "shop:product_list" %}">Главная страница</a>
 <a class="nav-link" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
@@ -16,42 +37,40 @@
 {% block content %}
 <div class="container text-center">
   <br>
-  <div class="container w-75 text-center">
+  <div class="container screen text-center">
     <h2>Как сделать заказ</h2><br>
-      <ol>
-        <li>
-          <p class="fs-5">Перед оформлением заказа рассчитайте необходимый
-        вес торта исходя из рекомендуемого количества 150-200 г на одного
-        человека.</p>
-        </li>
-        <li>
-          <p class="fs-5">При заказе бисквитных тортов можно выбрать
-        желаемую начинку и оформление на вкладке
-        <a href="{% url "shop:toppings_and_decoration" %}"><u>Начинки и оформление</u></a></p>
-        </li>
-        <li>
-          <p class="fs-5">Оформить заказ через сайт
-            или по указанным <a href="{% url "shop:contacts" %}"><u>контактам</u></a></p>
-        </li>
-      </ol>
+    <ol>
+      <li>
+        <p class="fs-5">Перед оформлением заказа рассчитайте необходимый
+          вес торта исходя из рекомендуемого количества 150-200 г на одного
+          человека.</p>
+      </li>
+      <li>
+        <p class="fs-5">При заказе бисквитных тортов можно выбрать
+          желаемую начинку и оформление на вкладке
+          <a href="{% url "shop:toppings_and_decoration" %}"><u>Начинки и оформление</u></a></p>
+      </li>
+      <li>
+        <p class="fs-5">Оформить заказ через сайт
+          или по указанным <a href="{% url "shop:contacts" %}"><u>контактам</u></a></p>
+      </li>
+    </ol>
     <br>
     <h2>Как заказать</h2><br>
-      <p class="fs-5">После оформления заказа на сайте менеджер свяжется с Вами для подтверждения и уточнения деталей.</p>
-      <p class="fs-5">Заказ необходимо оформить <b>не менее чем за 4 дня</b> до желаемой даты изготовления.</p>
-      <p class="fs-5">Минимальный вес для бисквитных тортов 1,5кг, муссовых тортов от 1кг.</p>
-      <p class="fs-5">Итоговая стоимость устанавливается после согласования заказа с менеджером.
-        Заказ поступает в работу после внесения предоплаты в размере не менее 70%.
-        Оставшуюся сумму можно оплатить по факту изготовления.</p><br>
+    <p class="fs-5">После оформления заказа на сайте менеджер свяжется с Вами для подтверждения и уточнения деталей.</p>
+    <p class="fs-5">Заказ необходимо оформить <b>не менее чем за 4 дня</b> до желаемой даты изготовления.</p>
+    <p class="fs-5">Минимальный вес для бисквитных тортов 1,5кг, муссовых тортов от 1кг.</p>
+    <p class="fs-5">Итоговая стоимость устанавливается после согласования заказа с менеджером.
+      Заказ поступает в работу после внесения предоплаты в размере не менее 70%.
+      Оставшуюся сумму можно оплатить по факту изготовления.</p><br>
   </div>
-    <div class="row align-items-center">
-      <div class="col-6">
-        <p class="fs-5">Вы можете забрать свой десерт самостоятельно по адресу:</p>
-        <p class="fs-5">г. Екатеринбург, ул. Комсомольская 15</p>
-        <p class="fs-5">или оформить Яндекс доставку.</p>
-      </div>
-      <div class="col">
-        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac83874af6a5b40b15a83cf0d269751fe3f6f49a26f0b1eac90bb8ab3e2ccc445&amp;width=100%25&amp;height=330&amp;lang=ru_RU&amp;scroll=true"></script>
-      </div>
+  <div class="row align-items-center">
+    <div class="col-md order-md-first mx-auto">
+      <p class="fs-5">Вы можете забрать свой десерт самостоятельно по адресу:</p>
     </div>
+    <div class="col-md-6 order-md-last flex-column">
+      <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ac83874af6a5b40b15a83cf0d269751fe3f6f49a26f0b1eac90bb8ab3e2ccc445&amp;width=100%25&amp;height=330&amp;lang=ru_RU&amp;scroll=true"></script>
+    </div>
+  </div>
 </div>
 {% endblock %}

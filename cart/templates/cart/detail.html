@@ -5,6 +5,20 @@
   Ваша корзина
 {% endblock %}
 
+{% block styles %}
+<style>
+@media (max-width: 768px) {
+  .cart {
+    height: 200px; /* Установите высоту таблицы */
+    overflow: auto; /* Добавьте полосу прокрутки */
+  }
+  .fixed {
+    position: fixed;
+  }
+}
+</style>
+{% endblock %}
+
 {% block nav %}
 <a class="nav-link active" href="{% url "shop:product_list" %}">Главная страница</a>
 <a class="nav-link" href="{% url "shop:toppings_and_decoration" %}">Начинки и оформление</a>
@@ -13,9 +27,13 @@
 <a class="nav-link" href="{% url "shop:contacts" %}">Контакты</a>
 {% endblock %}
 
+
+
 {% block content %}
-<div class="container">
-  <h1>Ваша корзина</h1>
+<div class="container" style="padding-top: 50px;">
+  <div class="text-center">
+    <h1>Ваша корзина</h1>
+  </div>
   <table class="cart">
     <thead>
       <tr>
@@ -67,9 +85,8 @@
       </tr>
     </tbody>
   </table>
-  <p class="text-right">
-    <a href="{% url "shop:product_list" %}" class="button
-    light">Продолжить покупки</a>
+  <p class="text-right fixed">
+    <a href="{% url "shop:product_list" %}" class="button light">Продолжить покупки</a>
     <a href="{% url "orders:order_create" %}" class="button">Оформить заказ</a>
   </p>
 </div>

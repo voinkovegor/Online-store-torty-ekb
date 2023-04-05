@@ -6,27 +6,48 @@
 {% block title %}
   {{ product.name }}
 {% endblock %}
+
+{% block styles %}
+<style>
+  @media (max-width: 767px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+}
+</style>
+{% endblock %}
+
+
+
 {% block content %}
 <div class="container">
-  <div class="product-detail">
-    <img src="{% if product.image %}{{ product.image.url }}{% else %}
-    {% static "img/no_image.png" %}{% endif %}">
-    <h1>{{ product.name }}</h1>
-    <p class="price">{{ product.price }} {% if product.choice %} руб/кг {% else %} руб {% endif %}</p>
-    {% if product.choice %}
-      <form action="{% url "cart:cart_add" product.id %}" method="post">
-        {{ cart_product_form }}
-        {% csrf_token %}
-        <input type="submit" value="Добавить в корзину">
-      </form>
-    {% else %}
-      <form action="{% url "cart:cart_add" product.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Добавить в корзину">
-      </form>
-    {% endif %}
-    <br>
-    {{ product.description|linebreaks }}
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+      <h1>{{ product.name }}</h1>
+      <p class="price">{{ product.price }} {% if product.choice %} руб/кг {% else %} руб {% endif %}</p>
+      {% if product.choice %}
+        <form action="{% url "cart:cart_add" product.id %}" method="post">
+          {{ cart_product_form }}
+          {% csrf_token %}
+          <input type="submit" value="Добавить в корзину">
+        </form>
+      {% else %}
+        <form action="{% url "cart:cart_add" product.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Добавить в корзину">
+        </form>
+      {% endif %}
+      <br>
+      {{ product.description|linebreaks }}
+    </div>
   </div>
 </div>
 {% endblock %}
