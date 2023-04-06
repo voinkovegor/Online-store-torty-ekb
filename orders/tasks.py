@@ -1,5 +1,6 @@
 from celery import shared_task
 
+from torty import settings
 from .models import Order
 
 from django.template.loader import get_template
@@ -28,7 +29,7 @@ def order_created(order_id):
     send_mail(subject,
               message=None,
               from_email=None,
-              recipient_list=[order.email],
+              recipient_list=[settings.EMAIL_MAKER],
               fail_silently=True,
               html_message=get_template(
                   'orders/order/mail_to_manager.html').render(

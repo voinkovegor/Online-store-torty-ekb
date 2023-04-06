@@ -152,7 +152,7 @@ EMAIL_MAKER = env('EMAIL_MAKER')
 
 if not DEBUG:
     ADMINS = [x.split(':') for x in env.list('ADMINS')]
-    #MANAGERS = ADMINS
+    # MANAGERS = env.list('MANAGERS')
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 
