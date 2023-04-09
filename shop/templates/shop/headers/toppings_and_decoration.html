@@ -39,7 +39,11 @@
       height: 400px; /* здесь можно указать желаемую высоту */
       /*object-fit: cover; !* обрезаем изображения до заданной высоты *!*/
     }
-
+  @media (min-width: 1320px) {
+      .container {
+        max-width: 75%;
+      }
+  }
 </style>
 {% endblock %}
 
@@ -74,8 +78,8 @@
   <div class="row row-cols-1 row-cols-md-2 gx-0">
     {% for topping in toppings %}
       {% if topping.image and topping.available %}
-        <div class="col">
-            <div class="card">
+        <div class="col mb-4 col-sm-12 col-md-12 col-lg-6">
+            <div class="card h-100">
               <img src="{% if topping.image %}{{ topping.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="card-img-top" alt="{{ topping.name }}">
               <div class="card-body text-center">
                 <h5 class="card-title"><b>{{ topping.name.upper }}</b></h5>
@@ -87,7 +91,6 @@
     {% endfor %}
   </div>
   <div class="row">
-<!--    <div class="col-1"></div>-->
     <div class="col-12 text-center">
       <h2 class="display-4" style="padding-top: 15px">Оформление бисквитных тортов</h2>
       <h4>Вы можете выбрать один из вариантов декора торта
@@ -95,12 +98,11 @@
           оформление торта в качестве образца</h4>
       <br>
     </div>
-<!--    <div class="col-1"></div>-->
   </div>
   <div class="row row-cols-1 row-cols-md-2 gx-0">
     {% for dekor in dekors %}
-        <div class="col">
-            <div class="card">
+        <div class="col mb-4 col-sm-12 col-md-12 col-lg-6">
+            <div class="card h-100">
               <img src="{% if dekor.image %}{{ dekor.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" class="card-img-top" alt="{{ dekor.name }}">
               <div class="card-body text-center">
                 <h5 class="card-title"><b>{{ dekor.name.upper }}</b></h5>

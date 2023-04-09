@@ -6,22 +6,19 @@
 
 {% block styles %}
   <style>
-  /* настройки для больших экранов */
+  @media (max-width: 768px) {
     .container.screen {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 75%; /* 75% от ширины экрана */
+      width: 100%; /* контейнер занимает всю ширину экрана */
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
     }
-
-    /* настройки для маленьких экранов */
-    @media (max-width: 768px) {
-      .container.screen {
-        width: 100%; /* контейнер занимает всю ширину экрана */
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+  }
+    @media (min-width: 1320px) {
+  .container.screen {
+    max-width: 75%;
+  }
+  }
   </style>
 {% endblock %}
 
